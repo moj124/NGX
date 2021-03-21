@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<div class='container'>
+    {% if user.id == None %}
+        <h1>Welcome Guest!</h1>
+    {% else %}
+        <h1>Welcome {{user}}!</h1>
+    {% endif %}
+
+    <div>
+        <h3>
+            Dashboard
+        </h3>
+
+        <p>
+            The dashboard webpage handles the monitoring of real-time groups in Room 34. It assumes the time to reach Room 43 is 15 minutes ETA.
+            Each group is measured in accordance to the 'time' (set to 10) parameter, which samples the occurrences of people within the robot's viewpoint.
+        </p>
+
+        <ul>
+            <li>
+                Current - metric measures the number of active people within each sampled group heading to Room 43. 
+            </li>
+            <li>
+                Total -  metric measures the total of inactive and active people detected at Room 34.
+            </li>
+        </ul>
+
+        <h3>
+            Display
+        </h3>
+
+        <p>
+            Provides an interactive component to the system, the display webpage will provide visitor directions in accordance to the social distancing capacity set for the National Gallery.
+            At different numbers of active visitors provide different guidance according to capacity.
+        </p>
+
+        <h3>
+            Data
+        </h3>
+
+        <p>
+            Provides informative data on the visitor flow detected in Room 34. We sub-divide the occurrences of people by hour and by day of detection.
+        </p>
+        {% if request.user.is_superuser %}
+        <h3>
+            Admin: Maintenance
+        </h3>
+
+        <p>
+            At every period of evaluation either monthly or yearly, the group database should be cleared to prevent any overflow or wasted storage usage. 
+            All the details of the database and users can be viewed by the admin at the '/admin/' page.
+        </p>
+        {% endif %}
+        
+
+
+    </div>
+</div>
+{% endblock %}

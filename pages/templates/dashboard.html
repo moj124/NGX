@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+    <div class="container p-5">
+        <div class='header'>
+            <h1 class='stat'>Room 43</h1>
+            {% if count.sum_ == "none" %}
+                <div class='stat ital'>Current: 0 / 30</div>
+            {% else %}
+                <div class = 'stat ital'>Current: {{count.sum_}} / 30</div>
+            {% endif %}
+
+            <div class = 'stat ital'>Total: {{total}}</div>
+        </div>
+        {% for obj in groups %}
+            <div class="item">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="fancy"> +{{obj.people}}</div>
+                    </div>
+                    <div class="col-7">
+                        <div id="event-box" class="time" data-object-id={{obj.pk}}>{{obj.date|date:"D M d Y H:i:s \G\M\T"}}</div>
+                    </div>
+                </div>
+                <div id="countdown-box" class="text-left mt-3 h1">
+                    <div class='spinner-border' role="status"></div>
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src={% static 'main.js' %} defer></script>
+{% endblock scripts %}

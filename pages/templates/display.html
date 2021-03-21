@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}
+    <script src={% static 'main.js' %} defer></script>
+{% endblock scripts %}
+
+{% block content%}
+<div class='container message'>
+    {% if count.sum_ < 20 %}
+    <i class="fas fa-check-square fa-5x"></i>
+        <div class='title'>Enter</div>
+        <div class='content'>Currently, {{count.sum_}} out of 30 people in Room 41</div>
+    {% elif count.sum_ >= 20 and count.sum_ < 30  %}
+    <i class="fas fa-exclamation-circle fa-5x"></i>
+        <div class='title'>Warning </div>
+        <div class='content'> Currently, {{count.sum_}} out of 30 people in Room 41</div>
+        <div class='content'> Please keep 2 metre distance</div>
+    {% else %}
+    <i class="fas fa-exclamation-triangle fa-5x"></i>
+        <div class='title'>Alert</div>
+        <div class='title-small'>Room 41 Is Full</div>
+        <div class='content'>Currently, {{count.sum_}} out of 30 people in Room 41. Please wait in the current room or move along a different room</div>
+    {% endif %}
+</div>
+
+{% endblock content%}
