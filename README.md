@@ -4,21 +4,26 @@ Social Distancing System using NAO and AI
 ## Getting Started
 
 In order to start NGX code clone [this repository](git@github.com:moj124/NGX.git) repository and run two commands: 
-`pipenv run python3 manage.py runserver`
-`pipenv run python3 manage.py runscript run_video`
-
+```
+pipenv run python3 manage.py runserver
+pipenv run python3 manage.py runscript run_video
+```
 
 
 On Mac OS X run:
-`pip install pipenv`
-`pipenv install -r requirements.txt`
-`pipenv shell`
+```
+pip install pipenv
+pipenv install -r requirements.txt
+pipenv shell
+```
 
 
 On Windows run:
-`pip install pipenv`
-`pipenv install -r requirements.txt`
-`pipenv shell`
+```
+pip install pipenv
+pipenv install -r requirements.txt
+pipenv shell
+```
 
 
 
