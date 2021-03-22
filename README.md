@@ -17,7 +17,7 @@ pipenv install -r requirements.txt
 pipenv shell
 ```
 
-In order to start NGX code clone [this repository](git@github.com:moj124/NGX.git) repository and run two commands: 
+In order to start NGX code clone [this repository](https://github.com/moj124/NGX) repository and run two commands: 
 ```
 pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
