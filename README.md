@@ -24,7 +24,7 @@ pipenv run python3 manage.py runscript run_video
 ```
 
 ## NAO programming interface
-In order to develop the system with usage of the NAOqi software, the Python SDK of Naoqi must be downloaded from [SDK](https://www.softbankrobotics.com/emea/en/support/nao-6/downloads-softwares).
+In order to develop the system with usage of the NAOqi software, the Python SDK of Naoqi must be downloaded from [here](https://www.softbankrobotics.com/emea/en/support/nao-6/downloads-softwares), you may find this installation guide helpful [here](https://developer.softbankrobotics.com/nao6/naoqi-developer-guide/sdks/python-sdk/python-sdk-installation-guide#python-install-guide).
 
 Also the python path must be assigned to the respective Naoqi python directory:
 ```
