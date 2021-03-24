@@ -56,6 +56,10 @@ class EventListView(ListView):
         return int(total)
 
 
+def admin_view(request, *args, **kwargs):
+    return redirect('/admin/')
+
+
 def logout_view(request, *args, **kwargs):
     # log out user
     logout(request)
