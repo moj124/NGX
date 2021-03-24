@@ -23,6 +23,15 @@ pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
 
+## Troubleshooting
+
+Its common over multiple executions of the ''pipenv run python3 manage.py runserver'' will produce redundant TCP connections after the attempts of closing down via 'CTRL + C'. In order to counteract this problem, run the follow command:
+
+'''
+sudo lsof -t -i tcp:8000 | xargs kill -9 
+'''
+This should kill any remaining TCP connection, allowing the established connection to the local webpage being served via the runserver command highlighted above.
+
 ## NAO programming interface
 In order to develop the system with usage of the NAOqi software, the Python SDK of Naoqi must be downloaded from [here](https://www.softbankrobotics.com/emea/en/support/nao-6/downloads-softwares), you may find this installation guide helpful [here](https://developer.softbankrobotics.com/nao6/naoqi-developer-guide/sdks/python-sdk/python-sdk-installation-guide#python-install-guide).
 
