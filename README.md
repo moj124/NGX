@@ -32,7 +32,7 @@ Also the python path must be assigned to the respective Naoqi python directory:
  export PYTHONPATH
 ```
 
-###Interfacing with NAO
+### Interfacing with NAO
 Implementation with the NAO robot can be achieved to produce the desired feedback functionality design within 'detect_person_yolov5' that is being called within 'scripts/run_video'.
 
 
