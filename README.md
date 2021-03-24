@@ -25,7 +25,7 @@ pipenv run python3 manage.py runscript run_video
 
 ## Troubleshooting
 
-Its common over multiple executions of the 'pipenv run python3 manage.py runserver' will produce redundant TCP connections after the attempts of closing down via 'CTRL + C'. In order to counteract this problem, run the follow command:
+Its common over multiple executions of the `pipenv run python3 manage.py runserver` will produce redundant TCP connections after the attempts of closing down via 'CTRL + C'. In order to counteract this problem, run the follow command:
 
 '''
 sudo lsof -t -i tcp:8000 | xargs kill -9 
