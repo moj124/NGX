@@ -66,9 +66,5 @@ Implementation with the NAO robot can be achieved to produce the desired feedbac
 [Click here](https://www.youtube.com/watch?v=FGXuvlBr0H0)
 
 
-### How to run tests:
+### How to run the Test Videos:
 
- Run `test.sh`
- ```bash
- ./test.sh
- ```
