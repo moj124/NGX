@@ -61,9 +61,9 @@ Implementation with the NAO robot can be achieved to produce the desired feedbac
 
 
 
-## Youtube Video Showing Kinba
+## Youtube Video Showing GUI with Detection/Tracking Aspects
 
-[Click here](https://www.youtube.com/watch?v=FGXuvlBr0H0)
+[Click here]()
 
 
 ### How to run the Test Videos:
