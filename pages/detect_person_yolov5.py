@@ -125,6 +125,8 @@ class People_Counter:
         self.groups = [{'time': [], 'count': []}]
         self.track_centers = {}
         self.people_crossed = 0
+        self.cumulative_count = 0
+        self.counted = []
         self.total = 0
 
         # set path for data and output
@@ -586,9 +588,19 @@ class People_Counter:
             if tracking_id not in self.ids:
                 self.ids.append(tracking_id)
 
+            # directional based line event trigger
             # check if person has crossed the line and is not seen before
-            if self.check_y(self.track_centers[tracking_id][-1][0]) < self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) > self.track_centers[tracking_id][0][1] and tracking_id not in self.tracked_ids:
-                self.tracked_ids.append(tracking_id)
+            # PERSON IS SEEN BELOW THE LINE #################################
+            if tracking_id not in self.counted and tracking_id not in self.tracked_ids:
+                if self.opt['line-side'].lower() == 'left':
+                    if self.check_y(self.track_centers[tracking_id][-1][0]) < self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) > self.track_centers[tracking_id][0][1]:
+                        self.tracked_ids.append(tracking_id)
+                        self.people_crossed += 1
+                # PERSON IS SEEN ABOVE THE LINE #################################
+                elif self.opt['line-side'].lower() == 'right':
+                    if self.check_y(self.track_centers[tracking_id][-1][0]) > self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) < self.track_centers[tracking_id][0][1]:
+                        self.tracked_ids.append(tracking_id)
+                        self.people_crossed += 1
 
             # cv2.rectangle(frame, (x1, y1), (x2, y2), color)
 
@@ -598,7 +610,7 @@ class People_Counter:
                         cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
             cv2.putText(frame, "Total:" + str(len(self.ids)), (10, 40),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-            cv2.putText(frame, "Current:" + str(len(self.tracked_ids)), (10, 80),
+            cv2.putText(frame, "Current:" + str(self.tracked_ids), (10, 80),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
             cv2.line(frame, self.opt['start'], self.opt['end'], color, 1)
 
@@ -764,7 +776,7 @@ class People_Counter:
         # sample group data based on the time parameter and FPS rate 4 times per total data
         if frame_count % int((self.opt["time"]*60)/(4*FPS)) == 0:
             print("FPS: ", FPS)
-            self.people_crossed += len(self.tracked_ids)
+            # self.people_crossed = len(self.tracked_ids)
 
             # where there are people who have crossed the event line trigger
             if self.people_crossed != 0:
@@ -781,6 +793,7 @@ class People_Counter:
 
                 # reset the attributes
                 self.people_crossed = 0
+                self.counted = list(set(self.counted + self.tracked_ids))
                 self.tracked_ids = []
 
         # sample total data based on time and FPS parameters
@@ -815,7 +828,8 @@ def start():
     # parameters
     opt = {'start': (0, 500), 'end': (1800, 950), 'port': 9559, 'ip': '127.0.0.1', 'time': 5.0, 'weights': 'yolov5s.pt',
            'source': 'data/images/street.mp4', 'conf': 0.6, 'iou': 0.6, 'view-img': True, 'save-txt': False, 'img-size': 640,
-           'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': False, 'classes': None, 'save-conf': True, 'device': '', 'augment': False, 'mask': 'best.pt', 'encoder_model': 'pages/model/mars-small128.pb'}
+           'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': False, 'classes': None, 'save-conf': True, 'device': '',
+           'augment': False, 'encoder_model': 'pages/model/mars-small128.pb', 'line-side': 'right'}
 
     # setup people_counter
     counter = People_Counter(opt)
@@ -895,6 +909,8 @@ if __name__ == '__main__':
                         help='mask model.pt path')
     parser.add_argument('--encoder_model', type=str,
                         default='pages/model/mars-small128.pb', help='encoder model path.')
+    parser.add_argument('--line-side', type=str,
+                        default='left', help='determine the direction of detection for the line.')
     # file/folder, 0 for webcam
     parser.add_argument('--source', type=str,
                         default='data/images/street.mp4', help='source')
@@ -931,7 +947,8 @@ if __name__ == '__main__':
 
     # opt = {'start': (13, 217), 'end': (376, 405), 'port': 9559, 'ip': '127.0.0.1', 'time': 2.0, 'weights': 'yolov5s.pt',
     #        'source': 'data/images/street.mp4', 'conf': 0.25, 'iou': 0.45, 'view-img': True, 'save-txt': False, 'img-size': 640,
-    #        'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': True, 'classes': None, 'save-conf': False, 'device': '', 'augment': False, 'mask': 'best.pt'}
+    #        'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': True, 'classes': None, 'save-conf': False,
+    #        'device': '', 'augment': False,  'line-side':'right'}
 
     counter = People_Counter(opt)
     counter.main_vid()

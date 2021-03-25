@@ -41,10 +41,12 @@ class EventListView(ListView):
 
         # get time delta  of 15 minutes
         start_date = datetime.datetime.now() - datetime.timedelta(minutes=15)
-
         # filter by time delta of 15 minutes
+        queryset.filter(date__lte=datetime.datetime.now() -
+                        datetime.timedelta(minutes=15)).delete()
         queryset = queryset.filter(
             date__range=[start_date, datetime.datetime.now()])
+
         return queryset
 
     def get_total_count(self):
