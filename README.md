@@ -23,6 +23,19 @@ pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
 
+## Creating a Superuser
+To start off the webpage, its good to create a superuser that has full access to the website and is able to manage the database of the GUI. 
+```
+pipenv run python3 manage.py createsuperuser
+
+# enter details:
+Username: *****
+Email address: admin@example.com
+Password: **********
+Password (again): *********
+Superuser created successfully.
+```
+
 ## Troubleshooting
 
 Its common over multiple executions of the `pipenv run python3 manage.py runserver` will produce redundant TCP connections after the attempts of closing down via `CTRL + C`. In order to counteract this problem, run the follow command:
