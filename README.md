@@ -27,8 +27,10 @@ pipenv run python3 manage.py runscript run_video
 To start off the webpage, its good to create a superuser that has full access to the website and is able to manage the database of the GUI. 
 ```
 pipenv run python3 manage.py createsuperuser
+```
 
-# enter details:
+Enter details:
+```
 Username: *****
 Email address: admin@example.com
 Password: **********
