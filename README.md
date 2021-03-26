@@ -92,6 +92,13 @@ def run():
     opt['source'] = 'data/images/mass_walking.mp4'
     opt['axis'] = 'horizontal'
     opt['line-side'] = 'right'
+    
+    # Test with walkingby video
+    #opt['start'] = (400, 0)
+    #opt['end'] = (400, 1000)
+    #opt['source'] = 'data/images/walkingby.mp4'
+    #opt['axis'] = 'vertical'
+    #opt['line-side'] = 'right'
 ```
 By setting these parameters, we can then run the script with the GUI using these commands in parallel:
 ```
