@@ -1,6 +1,11 @@
 # NGX
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
 
+## Getting Started with Masked-Wearer Detection
+Show procesing of images and videos for mask detection
+```
+python3 detect_mask_yolov5.py --view-img
+```
 ## Getting Started with People Counter and GUI
 A Windows based installation and function guide is provided, [Click here](https://youtu.be/RUkjI9g5vaw).
 
@@ -110,7 +115,3 @@ By setting these parameters, we can then run the script with the GUI using these
 pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
-## Getting Started with Masked-Wearer Detection
-Show procesing of images and videos for mask detection
-```
-python3 detect_mask_yolov5.py --view-img
