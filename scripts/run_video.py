@@ -6,6 +6,7 @@ from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from pages.models import Group
 import datetime
+import argparse
 import random
 
 
@@ -13,8 +14,33 @@ def run():
     """
     run script for detection and tracking algoirthm
     """
+    # retrieve inputs for line trigger and data source
+
+    opt = {}
+
+    # Test with street video
+    # opt['start'] = (0, 500)
+    # opt['end'] = (1800, 950)
+    # opt['line-side'] = 'left'
+    # opt['source'] = 'data/images/street.mp4'
+    # opt['axis'] = 'horizontal'
+
+    # Test with mass_walking video
+    # opt['start'] = (0, 500)
+    # opt['end'] = (1344, 500)
+    # opt['source'] = 'data/images/mass_walking.mp4'
+    # opt['axis'] = 'horizontal'
+    # opt['line-side'] = 'right'
+
+    # Test with walkingby video
+    opt['start'] = (400, 0)
+    opt['end'] = (400, 1000)
+    opt['source'] = 'data/images/walkingby.mp4'
+    opt['axis'] = 'vertical'
+    opt['line-side'] = 'right'
 
     # retrieve active group total
+
     def get_current():
         """
         retrieve total of active group counts
@@ -41,7 +67,8 @@ def run():
         return queryset
 
     # run detection and and tracking algorithms
-    start()
+    start(opt['start'], opt['end'], opt['line-side'],
+          opt['axis'], opt['source'])
 
     # For the NAO robot code
     ########################################################################################
