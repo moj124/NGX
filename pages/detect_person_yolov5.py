@@ -13,6 +13,7 @@ import csv
 import datetime
 import calendar
 import sys
+import math
 
 from pathlib import Path
 
@@ -821,7 +822,8 @@ class People_Counter:
         """
 
         # sample group data based on the time parameter and FPS rate 4 times per total data
-        if frame_count % int((self.opt["time"]*60)/(4*FPS)) == 0:
+        print( 'tESTINHG',math.ceil((self.opt["time"]*60)/(4*FPS)), frame_count)
+        if (frame_count % math.ceil((self.opt["time"]*60)/(4*FPS))) == 0:
             print("FPS: ", FPS)
             # self.people_crossed = len(self.tracked_ids)
 
@@ -844,7 +846,7 @@ class People_Counter:
                 self.tracked_ids = []
 
         # sample total data based on time and FPS parameters
-        if frame_count % int((self.opt["time"]*60)/FPS) == 0:
+        if (frame_count % math.ceil((self.opt["time"]*60)/FPS)) == 0:
             print("total FPS: ", FPS)
 
             # read csv and update with new total

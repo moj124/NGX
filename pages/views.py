@@ -14,6 +14,7 @@ import datetime
 
 class EventListView(ListView):
     login_url = '/login/'
+    data_path = "data/data.csv"
     redirect_field_name = '/accounts/login/'
     model = Group
     template_name = 'dashboard.html'
@@ -24,7 +25,7 @@ class EventListView(ListView):
         context = super(EventListView, self).get_context_data(**kwargs)
         # Create any data and add it to the context
         context['count'] = self.get_current()
-        context['total'] = self.get_total_count()
+        context['total'] = self.get_total_count(self.data_path)
         context['groups'] = self.get_valid_groups()
 
         return context
@@ -49,13 +50,23 @@ class EventListView(ListView):
 
         return queryset
 
-    def get_total_count(self):
+    def get_total_count(self,path):
         # retrieve total by the data file
-        with open("data/data.csv", 'r') as csv_file:
-            reader = csv.DictReader(csv_file)
-            total = sum(float(row["count"]) for row in reader)
+        try:
+            # open file
+            with open(path, 'r') as csv_file:
+                reader = csv.DictReader(csv_file)
+                total = sum(float(row["count"]) for row in reader)
 
-        return int(total)
+            return int(total)
+        except:
+             # when error occurs write a new file to path
+            print('File not loaded')
+            with open(path, 'w') as csv_file:
+                fieldnames = ['date', 'time', 'count']
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+        
 
 
 def admin_view(request, *args, **kwargs):
