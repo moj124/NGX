@@ -111,3 +111,6 @@ pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
 ## Getting Started with Masked-Wearer Detection
+Show procesing of images and videos for mask detection
+```
+python3 detect_mask_yolov5.py --view-img
