@@ -69,7 +69,7 @@ Implementation with the NAO robot can be achieved to produce the desired feedbac
 
 
 ### How to run the Test Videos:
-Parameters for different videos can be set in ['scripts/run_video'](https://github.com/moj124/NGX/tree/main/scripts), Such as running these two parameters seperately, will reproduce the results in ['runs/tests']:
+Parameters for different videos can be set in ['scripts/run_video'](https://github.com/moj124/NGX/tree/main/scripts), Such as running these two parameters seperately, will reproduce the results in ['runs/tests'](https://github.com/moj124/NGX/tree/main/runs/tests):
 ```
 def run():
     """
