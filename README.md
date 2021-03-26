@@ -1,8 +1,10 @@
 # NGX
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
 
-## Getting Started
+## Getting Started with People Counter and GUI
 A Windows based installation and function guide is provided, [Click here](https://youtu.be/RUkjI9g5vaw).
+
+
 
 On Mac OS X run:
 ```
@@ -29,7 +31,7 @@ pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
 
-## Creating a Superuser
+### Creating a Superuser
 To start off the webpage, its good to create a superuser that has full access to the website and is able to manage the database of the GUI. 
 ```
 pipenv run python3 manage.py createsuperuser
@@ -43,8 +45,7 @@ Password: **********
 Password (again): *********
 Superuser created successfully.
 ```
-
-## Troubleshooting
+### Troubleshooting
 
 Its common over multiple executions of the `pipenv run python3 manage.py runserver` will produce redundant TCP connections after the attempts of closing down via `CTRL + C`. In order to counteract this problem, run the follow command:
 
@@ -53,7 +54,7 @@ sudo lsof -t -i tcp:8000 | xargs kill -9
 ```
 This should kill any remaining TCP connection, allowing the established connection to the local webpage being served via the runserver command highlighted above.
 
-## NAO programming interface
+### NAO programming interface
 In order to develop the system with usage of the NAOqi software, the Python SDK of Naoqi must be downloaded from [here](https://www.softbankrobotics.com/emea/en/support/nao-6/downloads-softwares), you may find this installation guide helpful [here](https://developer.softbankrobotics.com/nao6/naoqi-developer-guide/sdks/python-sdk/python-sdk-installation-guide#python-install-guide).
 
 Also the python path must be assigned to the respective Naoqi python directory:
@@ -67,7 +68,7 @@ Implementation with the NAO robot can be achieved to produce the desired feedbac
 
 
 
-## Youtube Video Showing GUI with Detection/Tracking Aspects
+### Youtube Video Showing GUI with Detection/Tracking Aspects
 
 [Click here](https://youtu.be/RUkjI9g5vaw)
 
@@ -109,3 +110,4 @@ By setting these parameters, we can then run the script with the GUI using these
 pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
+## Getting Started with Masked-Wearer Detection
