@@ -26,18 +26,18 @@ def run():
     # opt['axis'] = 'horizontal'
 
     # Test with mass_walking video
-    # opt['start'] = (0, 500)
-    # opt['end'] = (1344, 500)
-    # opt['source'] = 'data/images/mass_walking.mp4'
-    # opt['axis'] = 'horizontal'
-    # opt['line-side'] = 'right'
+    opt['start'] = (0, 500)
+    opt['end'] = (1344, 500)
+    opt['source'] = 'data/images/mass_walking.mp4'
+    opt['axis'] = 'horizontal'
+    opt['line-side'] = 'right'
 
     # Test with walkingby video
-    opt['start'] = (400, 0)
-    opt['end'] = (400, 1000)
-    opt['source'] = 'data/images/walkingby.mp4'
-    opt['axis'] = 'vertical'
-    opt['line-side'] = 'right'
+    # opt['start'] = (400, 0)
+    # opt['end'] = (400, 1000)
+    # opt['source'] = 'data/images/walkingby.mp4'
+    # opt['axis'] = 'vertical'
+    # opt['line-side'] = 'right'
 
     # retrieve active group total
 
@@ -86,3 +86,4 @@ def run():
     # if (x >= lower_capacity and x <= max_capacity and p(x) > prob) or x > max_capacity:
     #     warning('Room 41 is currently, full please wait or check another room.')
     ########################################################################################
+
