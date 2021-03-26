@@ -67,7 +67,7 @@ Implementation with the NAO robot can be achieved to produce the desired feedbac
 
 ## Youtube Video Showing GUI with Detection/Tracking Aspects
 
-[Click here]()
+[Click here](https://youtu.be/RUkjI9g5vaw)
 
 
 ### How to run the Test Videos:
