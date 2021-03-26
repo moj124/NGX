@@ -3,8 +3,15 @@ Social Distancing System using NAO and AI, uses Django technology to create a we
 
 ## Getting Started with Masked-Wearer Detection
 Show processing of images and videos for mask detection
+
+On Mac OS X run:
 ```
 python3 detect_mask_yolov5.py --view-img
+```
+
+On Windows run:
+```
+python detect_mask_yolov5.py --view-img
 ```
 ## Getting Started with People Counter and GUI
 A Windows based installation and function guide is provided, [Click here](https://youtu.be/RUkjI9g5vaw).
