@@ -2,6 +2,8 @@
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
 
 ## Getting Started
+A Windows based installation and function guide is provided, [Click here](https://youtu.be/RUkjI9g5vaw).
+
 On Mac OS X run:
 ```
 pip install pipenv
