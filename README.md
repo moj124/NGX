@@ -7,6 +7,7 @@ On Mac OS X run:
 pip install pipenv
 pipenv install -r requirements.txt
 pipenv shell
+pipenv run python3 manage.py migrate
 ```
 
 
@@ -15,11 +16,11 @@ On Windows run:
 pip install pipenv
 pipenv install -r requirements.txt
 pipenv shell
+pipenv run python manage.py migrate
 ```
 
 In order to start NGX code clone [this repository](https://github.com/moj124/NGX) and run the two commands in parallel using two terminal windows: 
 ```
-pipenv run python3 manage.py migrate
 pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
 ```
