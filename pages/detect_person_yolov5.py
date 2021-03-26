@@ -590,21 +590,35 @@ class People_Counter:
 
             # directional based line event trigger
             # check if person has crossed the line and is not seen before
-            # PERSON IS SEEN BELOW THE LINE #################################
+
             if tracking_id not in self.counted and tracking_id not in self.tracked_ids:
-                if self.opt['line-side'].lower() == 'left':
-                    if self.check_y(self.track_centers[tracking_id][-1][0]) < self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) > self.track_centers[tracking_id][0][1]:
-                        self.tracked_ids.append(tracking_id)
-                        self.people_crossed += 1
-                # PERSON IS SEEN ABOVE THE LINE #################################
-                elif self.opt['line-side'].lower() == 'right':
-                    if self.check_y(self.track_centers[tracking_id][-1][0]) > self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) < self.track_centers[tracking_id][0][1]:
-                        self.tracked_ids.append(tracking_id)
-                        self.people_crossed += 1
+                if self.opt['axis'].lower() == 'horizontal':
+                    # PERSON IS SEEN BELOW THE LINE #################################
+                    if self.opt['line-side'].lower() == 'left':
+                        if self.check_y(self.track_centers[tracking_id][-1][0]) < self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) > self.track_centers[tracking_id][0][1]:
+                            self.tracked_ids.append(tracking_id)
+                            self.people_crossed += 1
 
-            # cv2.rectangle(frame, (x1, y1), (x2, y2), color)
+                    # PERSON IS SEEN ABOVE THE LINE #################################
+                    elif self.opt['line-side'].lower() == 'right':
+                        if self.check_y(self.track_centers[tracking_id][-1][0]) > self.track_centers[tracking_id][-1][1] and self.check_y(self.track_centers[tracking_id][0][0]) < self.track_centers[tracking_id][0][1]:
+                            self.tracked_ids.append(tracking_id)
+                            self.people_crossed += 1
+                elif self.opt['axis'].lower() == 'vertical':
+                    # PERSON IS SEEN BELOW THE LINE #################################
+                    if self.opt['line-side'].lower() == 'left':
+                        if self.opt['start'][0] < self.track_centers[tracking_id][-1][0] and self.opt['start'][0] > self.track_centers[tracking_id][0][0]:
+                            self.tracked_ids.append(tracking_id)
+                            self.people_crossed += 1
+                    # PERSON IS SEEN ABOVE THE LINE #################################
+                    elif self.opt['line-side'].lower() == 'right':
+                        if self.opt['start'][0] > self.track_centers[tracking_id][-1][0] and self.opt['start'][0] < self.track_centers[tracking_id][0][0]:
+                            self.tracked_ids.append(tracking_id)
+                            self.people_crossed += 1
 
-            # annotated frame image to view tracking elements
+                    # cv2.rectangle(frame, (x1, y1), (x2, y2), color)
+
+                    # annotated frame image to view tracking elements
             cv2.circle(frame, (cx, cy), 5, color, 2)
             cv2.putText(frame, str(tracking_id), (x1, y1+10),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
@@ -615,6 +629,36 @@ class People_Counter:
             cv2.line(frame, self.opt['start'], self.opt['end'], color, 1)
 
         return frame
+
+    def check_x(self, y):
+        """calculates the y-value of a given x value based off the gradient of the line, otherwise return None if x is empty
+
+        Parameters
+        ----------
+        x : float
+            a given x-value
+
+        Raises
+        ------
+        None
+            If no x-value is set.
+        """
+
+        # gradient of the event line trigger
+        if self.opt['start'][0] == self.opt['end'][0]:
+            grad = 0
+        else:
+            grad = (self.opt['end'][1]-self.opt['start'][1]) / \
+                (self.opt['end'][0]-self.opt['start'][0])
+
+        # where x is a valid value return the corresponding y-value
+        if y is not None:
+            if grad == 0:
+                return int(self.opt['start'][0])
+            return int((y - self.opt['start'][1])/grad)
+
+        # return None if input is not valid
+        return None
 
     def check_y(self, x):
         """calculates the y-value of a given x value based off the gradient of the line, otherwise return None if x is empty
@@ -631,8 +675,11 @@ class People_Counter:
         """
 
         # gradient of the event line trigger
-        grad = (self.opt['end'][1]-self.opt['start'][1]) / \
-            (self.opt['end'][0]-self.opt['start'][0])
+        if self.opt['start'][0] == self.opt['end'][0]:
+            grad = 0
+        else:
+            grad = (self.opt['end'][1]-self.opt['start'][1]) / \
+                (self.opt['end'][0]-self.opt['start'][0])
 
         # where x is a valid value return the corresponding y-value
         if x is not None:
@@ -822,14 +869,14 @@ class People_Counter:
             self.total = len(self.ids)
 
 
-def start():
+def start(start, end, side, axis, source):
     """load a people counter and run the algorithm"""
 
     # parameters
-    opt = {'start': (0, 500), 'end': (1800, 950), 'port': 9559, 'ip': '127.0.0.1', 'time': 5.0, 'weights': 'yolov5s.pt',
-           'source': 'data/images/street.mp4', 'conf': 0.6, 'iou': 0.6, 'view-img': True, 'save-txt': False, 'img-size': 640,
+    opt = {'start': start, 'end': end, 'port': 9559, 'ip': '127.0.0.1', 'time': 5.0, 'weights': 'yolov5s.pt',
+           'source': source, 'conf': 0.6, 'iou': 0.6, 'view-img': True, 'save-txt': False, 'img-size': 640,
            'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': False, 'classes': None, 'save-conf': True, 'device': '',
-           'augment': False, 'encoder_model': 'pages/model/mars-small128.pb', 'line-side': 'right'}
+           'augment': False, 'encoder_model': 'pages/model/mars-small128.pb', 'line-side': side, 'axis': axis}
 
     # setup people_counter
     counter = People_Counter(opt)
@@ -911,6 +958,8 @@ if __name__ == '__main__':
                         default='pages/model/mars-small128.pb', help='encoder model path.')
     parser.add_argument('--line-side', type=str,
                         default='left', help='determine the direction of detection for the line.')
+    parser.add_argument('--axis', type=str,
+                        default='horizontal', help='determine the axis of line trigger.')
     # file/folder, 0 for webcam
     parser.add_argument('--source', type=str,
                         default='data/images/street.mp4', help='source')
@@ -948,7 +997,7 @@ if __name__ == '__main__':
     # opt = {'start': (13, 217), 'end': (376, 405), 'port': 9559, 'ip': '127.0.0.1', 'time': 2.0, 'weights': 'yolov5s.pt',
     #        'source': 'data/images/street.mp4', 'conf': 0.25, 'iou': 0.45, 'view-img': True, 'save-txt': False, 'img-size': 640,
     #        'project': 'runs/detect', 'name': 'exp', 'exist_ok': False, 'agnostic-nms': True, 'classes': None, 'save-conf': False,
-    #        'device': '', 'augment': False,  'line-side':'right'}
+    #        'device': '', 'augment': False,  'line-side':'right','axis': 'horizontal'}
 
     counter = People_Counter(opt)
     counter.main_vid()
