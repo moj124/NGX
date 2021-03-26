@@ -93,7 +93,7 @@ def run():
     opt['axis'] = 'horizontal'
     opt['line-side'] = 'right'
 ```
-By setting these parameters, we can then run the script with the GUI:
+By setting these parameters, we can then run the script with the GUI using these commands in parallel:
 ```
 pipenv run python3 manage.py runserver
 pipenv run python3 manage.py runscript run_video
