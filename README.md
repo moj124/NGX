@@ -1,4 +1,5 @@
 # NGX
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
 
 ## Getting Started with Masked-Wearer Detection
