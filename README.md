@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300" src="https://github.com/moj124/NGX/blob/main/nao_head.png">
+  <img width="200" height="200" src="https://github.com/moj124/NGX/blob/main/nao_head.png">
 </p>
 # NGX
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
