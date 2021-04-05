@@ -86,9 +86,9 @@ def load_graph(path):
         plt.ylabel('Average Occurence of People')
         plt.grid(True)
         # save to the respective folder paths
-        plt.savefig('tests/'+day+'4_plot.pdf', bbox_inches='tight')
-        print('saved to ' + 'tests/'+day+'4_plot.pdf')
+        plt.savefig('runs/tests/'+day+'4_plot.pdf', bbox_inches='tight')
+        print('saved to ' + 'runs/tests/'+day+'4_plot.pdf')
 
 
 if __name__ == '__main__':
-    load_graph('tests/case4.csv')
+    load_graph('runs/tests/case4.csv')
