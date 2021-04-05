@@ -121,6 +121,16 @@ def run():
     #opt['axis'] = 'vertical'
     #opt['line-side'] = 'right'
 ```
+### How to run the test graphs:
+On mac run:
+```
+pipenv run python3 test_graph.py
+```
+On windows run:
+```
+pipenv run python test_graph.py
+```
+
 By setting these parameters, we can then run the script with the GUI using these commands in parallel:
 ```
 pipenv run python3 manage.py runserver
