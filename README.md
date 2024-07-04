@@ -5,6 +5,10 @@
 # NGX
 Social Distancing System using NAO and AI, uses Django technology to create a website for the GUI and the use of YOLOv5 models to perfrom people and mask detection and tracking.
 
+### Youtube Video Showing GUI with Detection/Tracking Aspects
+
+[Click here](https://youtu.be/RUkjI9g5vaw)
+
 ## Getting Started with Masked-Wearer Detection
 Show processing of images and videos for mask detection
 
@@ -81,13 +85,6 @@ Also the python path must be assigned to the respective Naoqi python directory:
 
 ### Interfacing with NAO
 Implementation with the NAO robot can be achieved to produce the desired feedback functionality design within ['pages/detect_person_yolov5.py'](https://github.com/moj124/NGX/blob/main/pages/detect_person_yolov5.py) that is being called within ['scripts/run_video'](https://github.com/moj124/NGX/tree/main/scripts).
-
-
-
-### Youtube Video Showing GUI with Detection/Tracking Aspects
-
-[Click here](https://youtu.be/RUkjI9g5vaw)
-
 
 ### How to run the Test Videos:
 Parameters for different videos can be set in ['scripts/run_video'](https://github.com/moj124/NGX/tree/main/scripts), Such as running these two parameters seperately, will reproduce the results in ['runs/tests'](https://github.com/moj124/NGX/tree/main/runs/tests):
